@@ -1,0 +1,178 @@
+Pseudocode
+
++ a function that returns the sum of two numbers 
+
+    Informal:
+        Given two numbers.
+
+        Adds the numbers and returns them in the same step.
+
+    Formal:
+        START
+
+        #Given two numbers. number1 and number2
+
+        PRINT number1 + number2
+
+        END
+
+
++ a function that takes an array of strings, and returns a string that is all those strings concatenated together 
+
+    Informal:
+        Given an array of stings.
+
+        Using the String.concat method to concatenat the stings.
+    
+        Save the new String and return it.
+
+    Formal:
+        START
+
+        # Given an array of strings called stringArray
+
+        SET concatString
+
+        concatString = the array concated.
+
+        PRINT concatString
+
+        END
+
+
++ a method that takes an array of integers, and returns a new array with every other element from the original array, starting with the first element.
+
+    Informal:
+
+        Given an array of integers
+
+        Iterate through the array but only stopping at every second entry.
+            - save the current value in the array.
+
+        After iterating return the saved values.
+
+    Formal:
+
+        START
+
+        # Given an array of numbers called "numbers"
+
+        SET iterator = 0
+        SET newArray = {};
+
+        WHILE iterator < length of numbers
+            SET currentNumber = value within the numbers array at space "iterator"
+
+            newArray = currentNumber + newArray
+
+            iterator = iterator + 2;
+
+
+        PRINT newArray
+
+        END
+
+a function that determines the index of the 3rd occurrence of a given character in a string. 
+For instance, if the given character is 'x' and the string is 'axbxcdxex', the function should return 6 (the index of the 3rd 'x'). 
+If the given character does not occur at least 3 times, return null. 
+
+    Informal:
+
+        Given a string and a given character
+
+        Iterate through the string one by one.
+            - for each iteration compare the given character with the current value.
+            - if the current value is equal to the given character
+                - increase a counter by one
+                - if the counter = 3
+                    - return the current value
+            - else if the current value is not equal to the given character
+                - move to the next value
+
+        After iterating and the character has not occurred at least 3 times
+            -return null
+             
+    Formal: 
+        START
+
+        # Given a givenString
+        # Given a givenCharacter
+
+        SET iterator = 0;
+        SET counter = 0;
+
+        WHILE iterator < lenght of String
+            SET currentCharacter = character at the current value of the givenString
+            IF currentCharacter = givenCharacter
+                counter = counter + 1
+                IF iterator = 3
+                    return iterator
+            ELSE do nothing
+
+            iterator = iterator + 1
+
+        RETURN null;
+
+
+a function that takes two arrays of numbers and returns the result of merging the arrays. 
+The elements of the first array should become the elements at the even indexes of the returned array, 
+while the elements of the second array should become the elements at the odd indexes.
+            
+ Informal:
+    
+    Given two arrays.
+
+    Iterate through a new array with the length of both lengths of the arrays combined 
+        - if the current value of the iteration is even
+            - take the first value of the first array and put it in a new array (shift method)
+            - erase the first entry of the first array (shift method)
+        - if the current value of the iteration is uneven
+            - take the first value of the second array and put it in a new array (shift method)
+            - erase the first entry of the second array (shift method)
+
+    When the iteration is done return the new array
+
+Formal:
+    START
+
+    # Given array1
+    # Given array2
+
+    SET newArray 
+    SET iterator = 0
+    
+    WHILE iterator < length of array1 and array2 combined
+        IF iterator = even
+            newArray at space "iterator" = array1.shift
+
+        ELSE 
+        newArray at space "iterator" = array2.shift
+
+        iterator = iterator + 1
+
+    PRINT newArray
+
+    END
+
+
+
+    
+
+
+
+
+
+    
+
+
+
+
+
+
+    
+
+
+
+
+
+
