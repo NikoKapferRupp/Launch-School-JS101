@@ -1,100 +1,129 @@
 const READLINE = require('readline-sync');
-const formatter = new Intl.NumberFormat('en-US', {
+const LOAN_CALCULATOR_MESSAGES = require('./loan_calculator_messages.json');
+const MONTHS_IN_A_YEAR = 12;
+const FORMATTER_US = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
 });
+const FORMATTER_DE = new Intl.NumberFormat('de-DE', {
+  style: 'currency',
+  currency: 'EUR',
+});
 
-function prompt(text) {
-  console.log('=> ' + text);
-};
+READLINE.setDefaultOptions({prompt: '=> '});
 
-function validNumberFloat(question) {
-  let float = Number(READLINE.question(question));
+let language;
+let currencyFormat;
 
-  while (isNaN(float) || float <= 0) {
-    prompt('This does not look like a valid number');
-    float = Number(READLINE.question(question));
-  } 
-  return float;
-};
+prompt('Please choose your language:');
 
-function validNumberInt(question, validFirstNum) {
-  let int = Number(READLINE.question(question));
+switch (Number(READLINE.keyIn('=> 1) Englisch 2) Deutsch: \n=> ', {limit: [1, 2]}))) {
+  case 1:
+    language = 'en';
+    currencyFormat = FORMATTER_US;
+    break;
+  case 2:
+    language = 'de';
+    currencyFormat = FORMATTER_DE;
+    break;
+  default:
+    language = 'en';
+    currencyFormat = FORMATTER_US;
+    break;
+}
 
-  while ( !Number.isInteger(int) || int < validFirstNum) {
-    prompt('This does not look like a valid number');
-    int = Number(READLINE.question(question));
-  } 
-  return int; 
-};
+prompt(LOAN_CALCULATOR_MESSAGES[language]['welcome']);
+prompt(LOAN_CALCULATOR_MESSAGES[language]['loanAmount']);
 
-function summary() {
+let loanAmount = validNumberFloat();
 
-  console.log('+--------------------------------------+');
-  console.log(`|${whiteSpaceCalculator('~~~~~~~~~')}|`);
-  console.log(`|${whiteSpaceCalculator('~Summary~')}|`);
-  console.log(`|${whiteSpaceCalculator('~~~~~~~~~')}|`);
-  console.log(`|${whiteSpaceCalculator('Your loan amount:')}|`);
-  console.log(`|${whiteSpaceCalculator(loanAmount)}|`);
-  console.log('|--------------------------------------|');
-  console.log(`|${whiteSpaceCalculator('Your payment every month:')}|`);
-  console.log(`|${whiteSpaceCalculator(monthlyPayment)}|`);
-  console.log('|--------------------------------------|');
-  console.log(`|${whiteSpaceCalculator('Your loan term in months:')}|`);
-  console.log(`|${whiteSpaceCalculator(loanDurationMonths.toString())}|`);
-  console.log('|--------------------------------------|');
-  console.log(`|${whiteSpaceCalculator('Your total interest:')}|`);
-  console.log(`|${whiteSpaceCalculator((monthlyPayment * loanDurationMonths) - loanAmount)}|`);
-  console.log('|--------------------------------------|');
-  console.log(`|${whiteSpaceCalculator('Your total payment:')}|`);
-  console.log(`|${whiteSpaceCalculator(monthlyPayment * loanDurationMonths)}|`);
-  console.log('+--------------------------------------+');
-};
+prompt(LOAN_CALCULATOR_MESSAGES[language]['monthlyIntrestRate']);
 
-function whiteSpaceCalculator(input) {
-  if(typeof input === 'number') {    
-    input = (formatter.format((Math.round(input * 100)) / 100));
-  };
-  
-  let limit = Math.round(((38 - input.length) / 2) + input.length);
-  
-  input = input.padStart(limit, ' ');
-  input = input.padEnd(38, ' ');
+let monthlyIntrestRate = validNumberFloat('=> Please enter the annual intrest rate in %: ') / 100 / 12;
 
-  return input;  
-};
-
-
-
-prompt('+-------------------------------------+');
-prompt('|   Welcome to the Loan Calculator!   |');
-prompt('+-------------------------------------+');
-
-let loanAmount = validNumberFloat('=> Please enter the loan amount in dollar: '); 
-let monthlyIntrestRate = validNumberFloat('=> Please enter the annual intrest rate in %: ') / 100 / 12; 
-
-
-prompt('How do you want to enter the loan duration?:');
-prompt('1) [YEARS] [MONTHS]');
-prompt('2) [MONTHS]');
+prompt(LOAN_CALCULATOR_MESSAGES[language]['loanDurationFormat']);
 
 let loanDurationFormat = READLINE.keyIn('=> ', {limit: [1, 2]}); // limits the input to "1" or "2"
 let loanDurationMonths;
 
 switch (loanDurationFormat) {
   case '1':
-    loanDurationMonths = validNumberInt('=> Please enter the loan duration in Years: ', 1) * 12;
-    loanDurationMonths += validNumberInt('=> Please enter the loan duration in Months: ', 0);
+    prompt(LOAN_CALCULATOR_MESSAGES[language]['loanDurationYears']);
+    loanDurationMonths = validNumberInt(1) * MONTHS_IN_A_YEAR;
+    prompt(LOAN_CALCULATOR_MESSAGES[language]['loanDurationMonths']);
+    loanDurationMonths += validNumberInt(0);
     break;
   case '2':
+    prompt(LOAN_CALCULATOR_MESSAGES[language]['loanDurationMonths']);
     loanDurationMonths = validNumberInt('=> Please enter the loan duration in Months: ');
     break;
 
   default:
     break;
-};
+}
 
 let monthlyPayment = loanAmount * (monthlyIntrestRate / (1 - Math.pow((1 + monthlyIntrestRate), (-loanDurationMonths))));
 
 summary();
+
+prompt(LOAN_CALCULATOR_MESSAGES[language]['thanks']);
+
+function prompt(text) {
+  console.log('=> ' + text);
+}
+
+function validNumberFloat() {
+  let float = Number(READLINE.prompt());
+
+  while (isNaN(float) || float <= 0 ) {
+    prompt('This does not look like a valid number');
+    float = Number(READLINE.prompt());
+  }
+  return float;
+}
+
+function validNumberInt(validFirstNum) {
+  let int = Number(READLINE.prompt());
+
+  while ( !Number.isInteger(int) || int < validFirstNum) {
+    prompt('This does not look like a valid number');
+    int = Number(READLINE.prompt());
+  }
+  return int;
+}
+
+function summary() {
+  prompt('+--------------------------------------+');
+  prompt(`|${paddingCalculator('~~~~~~~~~~~~~~~~~')}|`);
+  prompt(`|${paddingCalculator(LOAN_CALCULATOR_MESSAGES[language]['summary'])}|`);
+  prompt(`|${paddingCalculator('~~~~~~~~~~~~~~~~~')}|`);
+  prompt(`|${paddingCalculator(LOAN_CALCULATOR_MESSAGES[language]['summaryLoanAmount'])}|`);
+  prompt(`|${paddingCalculator(loanAmount)}|`);
+  prompt('|--------------------------------------|');
+  prompt(`|${paddingCalculator(LOAN_CALCULATOR_MESSAGES[language]['monthlyPayment'])}|`);
+  prompt(`|${paddingCalculator(monthlyPayment)}|`);
+  prompt('|--------------------------------------|');
+  prompt(`|${paddingCalculator(LOAN_CALCULATOR_MESSAGES[language]['loanTermMonths'])}|`);
+  prompt(`|${paddingCalculator(loanDurationMonths.toString())}|`);
+  prompt('|--------------------------------------|');
+  prompt(`|${paddingCalculator(LOAN_CALCULATOR_MESSAGES[language]['totalInterest'])}|`);
+  prompt(`|${paddingCalculator((monthlyPayment * loanDurationMonths) - loanAmount)}|`);
+  prompt('|--------------------------------------|');
+  prompt(`|${paddingCalculator(LOAN_CALCULATOR_MESSAGES[language]['totalPayment'])}|`);
+  prompt(`|${paddingCalculator(monthlyPayment * loanDurationMonths)}|`);
+  prompt('+--------------------------------------+');
+}
+
+function paddingCalculator(input) {
+  if (typeof input === 'number') {
+    input = (currencyFormat.format((Math.round(input * 100)) / 100));
+  }
+
+  let limit = Math.round(((38 - input.length) / 2) + input.length);
+
+  input = input.padStart(limit, ' ');
+  input = input.padEnd(38, ' ');
+
+  return input;
+}
 

@@ -1,0 +1,32 @@
+{
+  "en": {
+    "welcome": "+-------------------------------------+\n   |   Welcome to the Loan Calculator!   |\n   +-------------------------------------+",
+    "loanAmount": "Please enter the loan amount:",
+    "monthlyIntrestRate": "Please enter the annual interest rate in %:",
+    "loanDurationFormat": "Please select the preferred loan duration input format:\n=> 1) [YEARS] [MONTHS] or 2) [MONTHS]",
+    "loanDurationYears": "First enter the loan duration in Years: ",
+    "loanDurationMonths": "Now enter the loan duration in Months: ",    
+    "summary": "~    Summary    ~",
+    "summaryLoanAmount": "Your loan amount:",
+    "monthlyPayment": "Your payment every month:",
+    "loanTermMonths": "Your loan term in months:",
+    "totalInterest": "Your total interest:",
+    "totalPayment": "Your total payment:",
+    "thanks": "Thanks for using the loan calculator! Have a nice day!"
+  },
+  "de": {
+    "welcome": "+-------------------------------------+\n   |   Willkommen zum Kreditberechner!   |\n   +-------------------------------------+",
+    "loanAmount": "Bitte geben Sie die Kreditsumme ein:",
+    "monthlyIntrestRate": "Bitte geben Sie den Jahreszinssatz ein:",
+    "loanDurationFormat": "Wie wollen sie die Kreditlaufzeit eingeben?:\n=> 1) [JAHRE] [MONATE] or 2) [MONATE]",
+    "loanDurationYears": "Wie viele Jahre ist die Kreditlaufzeit? : ",
+    "loanDurationMonths": "Wie viele Monate ist die Kreditlaufzeit? : ",
+    "summary": "~Zusammenfassung~",
+    "summaryLoanAmount": "Ihre Kreditsumme:",
+    "monthlyPayment": "Monatliche Zahlung:",
+    "loanTermMonths": "Kreditlaufzeit in Monaten:",
+    "totalInterest": "Gesamter Zins:",
+    "totalPayment": "Gesamte Zahlung:",
+    "thanks": "Danke dass Sie den Kreditberechener benutzt haben! Tschüss!"
+  }
+}
