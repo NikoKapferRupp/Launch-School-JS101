@@ -2,6 +2,7 @@
   "en": {
     "welcome": "+-------------------------------------+\n   |   Welcome to the Loan Calculator!   |\n   +-------------------------------------+",
     "loanAmount": "Please enter the loan amount:",
+    "invalidInput": "Oh no! This does not look like a valid number...",
     "monthlyIntrestRate": "Please enter the annual interest rate in %:",
     "loanDurationFormat": "Please select the preferred loan duration input format:\n=> 1) [YEARS] [MONTHS] or 2) [MONTHS]",
     "loanDurationYears": "First enter the loan duration in Years: ",
