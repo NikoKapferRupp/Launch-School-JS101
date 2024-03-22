@@ -1,4 +1,4 @@
-// Question 2
+
 
 let str1 = "Come over here!"; // true
 let str2 = "What's up, Doc?"; // false
@@ -7,6 +7,4 @@ function isLastIndexExclamationMark(string) {
   return string[string.length - 1].includes('!');  
 }
 
-console.log(isLastIndexExclamationMark(str1));
-console.log(isLastIndexExclamationMark(str2));
 
